@@ -1,0 +1,20 @@
+#!/bin/bash
+
+initialize_system() {
+    directories=("active_logs" "archived_logs" "reports")
+
+    for dir in "${directories[@]}"; do
+        if [ ! -d "$dir"  ]; then
+             echo "Creating $dir directory.."
+             mkdir "$dir"
+             echo "$dir directory created"
+        else
+             echo "$dir directory already exists"
+        fi
+    done
+
+    echo "System initialization completed"
+}
+
+
+initialize_system
