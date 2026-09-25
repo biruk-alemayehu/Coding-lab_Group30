@@ -21,3 +21,4 @@ initialize_system
 
 Secure_data() {
 	echo "Securing active_logs directory (owner-only access)..."
+	chmod 700 active_logs
