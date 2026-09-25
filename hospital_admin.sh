@@ -18,3 +18,6 @@ initialize_system() {
 
 
 initialize_system
+
+Secure_data() {
+	echo "Securing active_logs directory (owner-only access)..."
