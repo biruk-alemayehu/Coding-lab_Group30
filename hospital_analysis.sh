@@ -13,4 +13,17 @@ process_vitals() {
     echo "Saved to $REPORT_DIR/critical_alerts.txt"
 }
 
+water_audit() {
+    awk -F' \\| ' '$2 == "ICU_WATER_RESERVE" {sum += $3; count++}
+    END {
+        if (count == 0) { print "No ICU_WATER_RESERVE readings found"; exit }
+        printf "\n===== ICU Water Audit =====\n"
+        printf "%-12s %s\n", "Device:", "ICU_WATER_RESERVE"
+        printf "%-12s %d\n", "Readings:", count
+        printf "%-12s %.2f L\n", "Average:", sum / count
+        printf "===========================\n"
+    }' "$WATER_LOG"
+}
+
 process_vitals
+water_audit
