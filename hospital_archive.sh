@@ -8,7 +8,7 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
 logs=(
  "heart_rate_log.log"
- "temprature_log.log"
+ "temperature_log.log"
  "water_usage_log.log"
 )
 
@@ -21,7 +21,14 @@ for log in "${logs[@]}"; do
          base="${log%_log.log}"
          echo "Archiving $log..."
 
-         mv "$ACTIVE_DIR/$log" \
-            "$ARCHIVE_DIR/${base}_${TIMESTAMP}.log"
+        if mv "$ACTIVE_DIR/$log" "$ARCHIVE_DIR/${base}_${TIMESTAMP}.log"; then
+            touch "$ACTIVE_DIR/$log"
+            echo "$log archived and recreated successfully."
+        else
+            echo "Error: Failed to archive $log."
+        fi
+
+    else
+         echo "warning: $log was not found."
     fi
 done
