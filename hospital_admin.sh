@@ -17,7 +17,6 @@ initialize_system() {
 }
 
 
-initialize_system
 
 secure_data() {
 	echo "Securing active_logs directory (owner-only access)..."
@@ -25,3 +24,9 @@ secure_data() {
 	echo "updated permisions for active_logs:"
 		ls -ld active_logs
 }
+
+initialize_system
+secure_data
+
+echo "System Environment Secured - $(date)"
+
