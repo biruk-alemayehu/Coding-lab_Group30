@@ -13,4 +13,9 @@ process_vitals() {
     echo "Saved to $REPORT_DIR/critical_alerts.txt"
 }
 
+water_audit() {
+    awk -F' \\| ' '$2 == "ICU_WATER_RESERVE" {sum += $3; count++}
+    END {print sum / count}' "$WATER_LOG"
+}
+
 process_vitals
